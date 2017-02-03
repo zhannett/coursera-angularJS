@@ -23,7 +23,7 @@
       } else {
         items.forEach(function(item) {
           if (item === '')
-          $scope.emptyItemNote = 'We do NOT consider and empty item, i.e., , , as an item towards to the count';
+          $scope.emptyItemNote = 'We do NOT consider an empty item, i.e., , , as an item towards to the count';
         });
         if (items.length <= 3) {
           $scope.message = 'Enjoy!';
