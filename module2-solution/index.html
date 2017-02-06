@@ -44,7 +44,7 @@
      <ul>
        <li ng-repeat="item in toBuy.items">
          <div class="col1">
-           Buy {{item.quantity}} {{item.name}}(s)
+           Buy {{item.quantity}} {{item.name}}
          </div>
          <div class="col2">
            <button ng-click="toBuy.handleItem($index, item.name, item.quantity)" class="btn btn-default">
@@ -60,7 +60,7 @@
     <div ng-controller="AlreadyBoughtController as alreadyBought" class="col-md-6">
      <h2>Already Bought:</h2>
      <ul>
-       <li ng-repeat="item in alreadyBought.items">Bought {{item.quantity}} {{item.name}}(s)</li>
+       <li ng-repeat="item in alreadyBought.items">Bought {{item.quantity}} {{item.name}}</li>
      </ul>
      <div ng-if="alreadyBought.items.length === 0" class="emptyMessage">Nothing bought yet.</div>
     </div>
