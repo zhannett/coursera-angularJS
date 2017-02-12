@@ -1,9 +1,7 @@
-<div>
-  menu.foundItems {{menu.foundItems}} <br/>
-</div>
-<ol>
-  <li ng-repeat="foundItem in menu.foundItems track by $index">
-    {{foundItem}}
+<h3>{{title}}</h3>
+<ol >
+  <li ng-repeat="foundItem in foundItems track by $index">
+    <div class="foundItem">{{foundItem}}</div>
     <button ng-click="menu.onRemove({index: $index});">Don't want this one!</button>
   </li>
 </ol>

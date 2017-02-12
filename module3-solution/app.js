@@ -11,48 +11,40 @@
   function FoundItemsDirective() {
     return {
       scope: {
-        //menu: '<',
-        foundItems: '@foundItems',
+        foundItems: '<',
+        title: '@',
         onRemove: '&'
       },
       templateUrl: 'foundItems.html',
-      restrict: "A",
-      controller: NarrowItDownController,
-      controllerAs: 'menu',
-      bindToController: true
-    };
+      restrict: "A"
+    }
   }
-
 
   NarrowItDownController.$inject['MenuSearchService'];
   function NarrowItDownController(MenuSearchService) {
     var menu = this;
-    var searchTerm = document.querySelectorAll('input')[0].value.toLowerCase();
-
+    menu.title = '';
+    menu.found = [];
     menu.startSearch = function() {
-       MenuSearchService.getMatchedMenuItems(searchTerm)
+      var searchTerm = document.querySelectorAll('input')[0].value.toLowerCase();
+      menu.found = MenuSearchService.getMatchedMenuItems(searchTerm)
        .then(function(result) {
-          console.log('typeof menuFound ', typeof result);
-          console.log('menu.found.length = ', result.length);
           menu.found = result;
+          if (menu.found.length > 0) {
+            menu.title = "Search Results for '" + searchTerm + "' (" + menu.found.length + " results)";
+          }
        });
     };
-    //  menu.found = ['beef1', 'beef2', 'beef3'];
-      //console.log('menu.found = ', menu.found);
-    //  console.log('typeof menuFound ', typeof menu.found);
-      //console.log('menu.found.length = ', menu.found.length);
-    //}
-
     menu.removeItem = function (itemIndex) {
       console.log("'this' is: ", this);
-      //menu.removeItem(itemIndex);
+      menu.found.splice(itemIndex, 1);
+      //this.lastRemoved = "Last item removed was " + this.items[itemIndex].name;
     };
   };
 
   MenuSearchService.$inject['$http', 'ApiBasePath'];
   function MenuSearchService($http, ApiBasePath) {
     var service = this;
-
     service.getMatchedMenuItems = function(searchTerm) {
       var foundItems = [];
       return $http({
@@ -60,14 +52,12 @@
         url: (ApiBasePath + "/menu_items.json")
       })
       .then(function(result) {
-        result.data.menu_items.forEach(function(item) {
+        var allItems = result.data.menu_items;
+        allItems.forEach(function(item) {
           if (item.description.toLowerCase().indexOf(searchTerm) !== -1) {
             foundItems.push(item.description);
           }
         });
-        //console.log('found items = ', foundItems);
-        //console.log('typeof found items = ', typeof foundItems);
-        //console.log('found items length = ', foundItems.length);
         return foundItems;
       })
       .catch(function(error) {

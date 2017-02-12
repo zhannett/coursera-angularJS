@@ -50,3 +50,18 @@ input[type="text"] {
     transform: rotate(360deg);
   }
 }
+h3 {
+  clear: both;
+  margin: 0.7rem 0;
+  color: red;
+}
+ol {
+  padding-left: 20px;
+}
+li {
+  padding: 0.5rem 0;
+}
+.foundItem {
+  width: 80%;
+  display: inline-block;
+}
