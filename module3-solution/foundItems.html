@@ -2,6 +2,6 @@
 <ol >
   <li ng-repeat="foundItem in foundItems track by $index">
     <div class="foundItem">{{foundItem}}</div>
-    <button ng-click="menu.onRemove({index: $index});">Don't want this one!</button>
+    <button ng-click="onRemove({index: $index});">Don't want this one!</button>
   </li>
 </ol>

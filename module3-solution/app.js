@@ -31,16 +31,14 @@
        .then(function(result) {
           menu.found = result;
           if (menu.found.length > 0) {
-            menu.title = "Search Results for '" + searchTerm + "' (" + menu.found.length + " results)";
+            menu.title = "Search Results for '" + searchTerm;
           }
-       });
-    };
+        });
+    }
     menu.removeItem = function (itemIndex) {
-      console.log("'this' is: ", this);
       menu.found.splice(itemIndex, 1);
-      //this.lastRemoved = "Last item removed was " + this.items[itemIndex].name;
     };
-  };
+  }
 
   MenuSearchService.$inject['$http', 'ApiBasePath'];
   function MenuSearchService($http, ApiBasePath) {
