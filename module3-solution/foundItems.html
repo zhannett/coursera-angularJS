@@ -1,7 +1,11 @@
 <h3>{{title}}</h3>
-<ol >
+<ul >
   <li ng-repeat="foundItem in foundItems track by $index">
-    <div class="foundItem">{{foundItem}}</div>
+    <div class="foundItem">
+      <strong>{{foundItem.name}},
+      {{foundItem.short_name}}</strong><br/>
+      {{foundItem.description}}
+    </div>
     <button ng-click="onRemove({index: $index});">Don't want this one!</button>
   </li>
-</ol>
+</ul>

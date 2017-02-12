@@ -4,7 +4,8 @@
   angular.module('NarrowItDownApp', [])
     .controller('NarrowItDownController', NarrowItDownController)
     .service('MenuSearchService', MenuSearchService)
-    .constant('ApiBasePath', "http://davids-restaurant.herokuapp.com")
+    //.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com")
+    .constant('ApiBasePath', "https://github.com/zhannett/helpers/blob/master/menu-items.json")
     .directive('foundItems', FoundItemsDirective);
 
   FoundItemsDirective.$inject = ['MenuSearchService'];
@@ -53,7 +54,7 @@
         var allItems = result.data.menu_items;
         allItems.forEach(function(item) {
           if (item.description.toLowerCase().indexOf(searchTerm) !== -1) {
-            foundItems.push(item.description);
+            foundItems.push(item);
           }
         });
         return foundItems;
