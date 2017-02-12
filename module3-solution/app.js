@@ -27,13 +27,16 @@
     menu.found = [];
     menu.startSearch = function() {
       var searchTerm = document.querySelectorAll('input')[0].value.toLowerCase();
-      menu.found = MenuSearchService.getMatchedMenuItems(searchTerm)
-       .then(function(result) {
-          menu.found = result;
-          if (menu.found.length > 0) {
-            menu.title = "Search Results for '" + searchTerm;
-          }
+      if (searchTerm === '') {
+        menu.found = [];
+        menu.title = "Nothing found";
+      } else {
+        menu.found = MenuSearchService.getMatchedMenuItems(searchTerm)
+         .then(function(result) {
+           menu.found = result;
+           menu.title = "Search Results for " + searchTerm;
         });
+      }
     }
     menu.removeItem = function (itemIndex) {
       menu.found.splice(itemIndex, 1);
